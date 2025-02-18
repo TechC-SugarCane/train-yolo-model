@@ -4,4 +4,57 @@ version = "0.1.0"
 description = "Train YOLO model"
 readme = "README.md"
 requires-python = ">=3.12.7"
-dependencies = []
+dependencies = [
+    "albumentations>=2.0.4",
+    "numpy==1.26.4",
+    "ultralytics[logging]==8.3.75",
+]
+
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15.0",
+    "ruff>=0.9.6",
+]
+export = [
+    "onnx>=1.17.0",
+]
+
+[project.optional-dependencies]
+cpu = [
+    "torch==2.6.0",
+    "torchvision==0.21.0",
+]
+gpu = [
+    "torch==2.6.0",
+    "torchvision==0.21.0",
+]
+
+[tool.uv]
+default-groups = ["dev", "export"]
+conflicts = [
+    [
+        { extra = "cpu" },
+        { extra = "gpu" },
+    ],
+]
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu118", extra = "gpu" },
+]
+torchvision = [
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu118", extra = "gpu" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu118"
+url = "https://download.pytorch.org/whl/cu118"
+explicit = true
