@@ -13,6 +13,7 @@
 #>
 param(
     [Parameter(Mandatory = $true, HelpMessage = "モデルバージョンを指定してください。 (例: yolov10)")]
+    [ValidateNotNullOrEmpty()]
     [alias("v")]
     [string]$ModelVersion,
 
