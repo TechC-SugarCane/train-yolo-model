@@ -16,7 +16,10 @@ param(
     [string]$ModelVersion,
 
     [Parameter(HelpMessage = "ダウンロードする重み名のリストを指定してください。 (例: s, m, l)")]
-    [string[]]$WeightNameList
+    [string[]]$WeightNameList,
+
+    [Parameter(HelpMessage = "再ダウンロードの確認をスキップします。")]
+    [switch]$Force
 )
 
 # 定数の定義
@@ -39,7 +42,9 @@ try {
 
 # パラメータを小文字に統一（配列内の各要素を変換）
 $ModelVersion = $ModelVersion.ToLower()
-$WeightNameList = $WeightNameList | ForEach-Object { $_.ToLower() }
+if ($null -ne $WeightNameList) {
+    $WeightNameList = $WeightNameList | ForEach-Object { $_.ToLower() }
+}
 
 # モデルバージョンの存在確認
 if (-not $WEIGHT_MAP.ContainsKey($ModelVersion)) {
@@ -84,7 +89,7 @@ function Get-YOLOWeight {
     $WeightsPathTmp = "$WeightsPath.tmp"
 
     # 既に重みファイルが存在する場合の確認
-    if (Test-Path $WeightsPath) {
+    if (-not $Force -and (Test-Path $WeightsPath)) {
         Write-Host "重みファイル '$FullWeightName' は既に存在します。"
         $response = Read-Host "再ダウンロードしますか？ (y/n) [n]"
         if ($response -notin @('y', 'Y')) {
