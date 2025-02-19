@@ -7,7 +7,7 @@ requires-python = ">=3.12.7"
 dependencies = [
     "albumentations>=2.0.4",
     "numpy==1.26.4",
-    "ultralytics[logging]==8.3.75",
+    "ultralytics==8.3.75",
 ]
 
 
@@ -21,6 +21,10 @@ export = [
     "onnxslim>=0.1.48",
 ]
 
+logging = [
+    "tensorboard>=2.13.0",
+]
+
 [project.optional-dependencies]
 cpu = [
     "torch==2.6.0",
@@ -32,7 +36,7 @@ gpu = [
 ]
 
 [tool.uv]
-default-groups = ["dev", "export"]
+default-groups = ["dev", "export", "logging"]
 conflicts = [
     [
         { extra = "cpu" },
