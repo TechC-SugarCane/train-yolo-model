@@ -73,17 +73,17 @@ uv run yolo settings datasets_dir=../manage-dataset/
 
 ### 5. 事前学習済みモデルのダウンロード
 
-[`utils\download_yolo_weights.ps1`](utils\download_yolo_weights.ps1)を使うと、[`weights\weights_map.json`](weights/weights_map.json)に記載されているモデルの重みがダウンロードできます。
+[`./utils/download_yolo_weights.ps1`](utils/download_yolo_weights.ps1)を使うと、[`./weights/weights_map.json`](weights/weights_map.json)に記載されているモデルの重みがダウンロードできます。
 
 ```ps1
 # (例1) YOLOv10の全ての重みをダウンロード
-.\utils\download_yolo_weights.ps1 -v "yolov10"
+./utils/download_yolo_weights.ps1 -v "yolov10"
 # (例2) YOLOv10のsの重みをダウンロード
-.\utils\download_yolo_weights.ps1 -v "yolov10" -w s
+./utils/download_yolo_weights.ps1 -v "yolov10" -w s
 # (例3) YOLOv10のs,m,lの重みをダウンロード
-.\utils\download_yolo_weights.ps1 -v "yolov10" -w s,m,l
+./utils/download_yolo_weights.ps1 -v "yolov10" -w s,m,l
 # (例4) YOLOv11の全ての重みを強制的にダウンロード
-.\utils\download_yolo_weights.ps1 -v "yolov11" -f
+./utils/download_yolo_weights.ps1 -v "yolov11" -f
 ```
 
 ### 6. データセットのダウンロード
