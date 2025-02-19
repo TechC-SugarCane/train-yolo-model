@@ -1,3 +1,16 @@
+<#
+.SYNOPSIS
+    指定したYOLOモデルの重みファイルをダウンロードします。
+
+.DESCRIPTION
+    JSONファイル（weights_map.json）からモデル情報を取得し、指定した重み名のファイルをダウンロードします。
+    既にファイルが存在する場合は、再ダウンロードの確認を行います。
+
+.EXAMPLE
+    .\utils\download_yolo_weights.ps1 -ModelVersion "yolov10" -WeightNameList s,m,l
+.EXAMPLE
+    .\utils\download_yolo_weights.ps1 -ModelVersion "yolov10" -WeightNameList x
+#>
 param(
     [Parameter(Mandatory = $true, HelpMessage = "モデルバージョンを指定してください。 (例: yolov10)")]
     [string]$ModelVersion,
