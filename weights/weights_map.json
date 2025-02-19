@@ -1,0 +1,7 @@
+{
+    "yolov10": {
+        "name": "yolov10",
+        "url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/",
+        "weights": ["n", "s", "m", "b", "l", "x"]
+    }
+}
