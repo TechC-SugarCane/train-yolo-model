@@ -18,6 +18,7 @@ dev = [
 ]
 export = [
     "onnx>=1.17.0",
+    "onnxslim>=0.1.48",
 ]
 
 [project.optional-dependencies]

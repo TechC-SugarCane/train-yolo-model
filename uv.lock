@@ -1623,6 +1623,21 @@ wheels = [
 ]
 
 [[package]]
+name = "onnxslim"
+version = "0.1.48"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "onnx" },
+    { name = "packaging" },
+    { name = "sympy", version = "1.13.1", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform == 'darwin' or extra == 'extra-16-train-yolo-model-cpu' or extra == 'extra-16-train-yolo-model-gpu'" },
+    { name = "sympy", version = "1.13.3", source = { registry = "https://pypi.org/simple" }, marker = "(sys_platform != 'darwin' and extra != 'extra-16-train-yolo-model-cpu' and extra != 'extra-16-train-yolo-model-gpu') or (extra == 'extra-16-train-yolo-model-cpu' and extra == 'extra-16-train-yolo-model-gpu')" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6c/2c/04cc6818e8ce5182503772866ecc50131d4bb6daf07b6cb04efa48a9216b/onnxslim-0.1.48.tar.gz", hash = "sha256:0a0cb504bb334a494509e641142ff81bbc702cd4e125d3ea35c386bde1e9c92c", size = 121322 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/80/4f/266401bf4528ac8f767b3d41f0fb6a610e1a6da1b6f7c3591350ecba11e0/onnxslim-0.1.48-py3-none-any.whl", hash = "sha256:38a3ba7abce89af154038b032eff52556680e0595fa300ec8cb72581ac8d3741", size = 142858 },
+]
+
+[[package]]
 name = "opencv-python"
 version = "4.11.0.86"
 source = { registry = "https://pypi.org/simple" }
@@ -2797,6 +2812,7 @@ dev = [
 ]
 export = [
     { name = "onnx" },
+    { name = "onnxslim" },
 ]
 
 [package.metadata]
@@ -2815,7 +2831,10 @@ dev = [
     { name = "mypy", specifier = ">=1.15.0" },
     { name = "ruff", specifier = ">=0.9.6" },
 ]
-export = [{ name = "onnx", specifier = ">=1.17.0" }]
+export = [
+    { name = "onnx", specifier = ">=1.17.0" },
+    { name = "onnxslim", specifier = ">=0.1.48" },
+]
 
 [[package]]
 name = "triton"
