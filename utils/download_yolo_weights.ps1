@@ -13,12 +13,15 @@
 #>
 param(
     [Parameter(Mandatory = $true, HelpMessage = "モデルバージョンを指定してください。 (例: yolov10)")]
+    [alias("v")]
     [string]$ModelVersion,
 
     [Parameter(HelpMessage = "ダウンロードする重み名のリストを指定してください。 (例: s, m, l)")]
+    [alias("w")]
     [string[]]$WeightNameList,
 
     [Parameter(HelpMessage = "再ダウンロードの確認をスキップします。")]
+    [alias("f")]
     [switch]$Force
 )
 
