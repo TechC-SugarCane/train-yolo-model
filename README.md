@@ -96,3 +96,41 @@ cd ..
 git clone git@github.com:TechC-SugarCane/manage-dataset.git
 # その後、READMEに従ってデータセットをダウンロード
 ```
+
+
+
+## Training
+
+<details>
+<summary>YOLOv10</summary>
+
+```bash
+# サトウキビをファインチューニングするコマンド
+uv run yolo detect train cfg='cfg/yolov10/sugarcane.yaml' data=data/sugarcane.yaml model=weights/yolov10/yolov10x.pt name='yolov10x-sugarcane' epochs=300 batch=16 imgsz=640 device=0
+
+# パイナップルをファインチューニングするコマンド
+uv run yolo detect train cfg='cfg/yolov10/pineapple.yaml' data=data/pineapple.yaml model=weights/yolov10/yolov10x.pt name='yolov10x-pineapple' epochs=300 batch=16 imgsz=640 device=0
+```
+
+※ 上記を実行すると`yolov8n.pt`がダウンロードされますが、AMPというものの確認用に追加されているだけらしいので気にしなくて大丈夫です。
+詳しくは[#106](https://github.com/THU-MIG/yolov10/issues/106)を参照してください。
+</details>
+
+<br>
+
+学習後の結果は`runs/detect/<name(番号)>`に保存されます。
+
+また、ハイパーパラメーターは自由に調整してください。下記ファイルが`cfg/<yolo_version>`にあります。このファイルの`Hyperparameters`の部分でハイパラ関連の設定ができます。
+
+- サトウキビ: `sugarcane.yaml`
+- パイナップル: `pineapple.yaml`
+
+## Export
+
+モデルをONNXにエクスポートする際は、下記のコマンドを実行してください。
+
+```sh
+# End-to-End ONNX
+# <name(番号)>は、学習後の結果のディレクトリ名を指定してください
+uv run yolo export model="runs/detect/<name(番号)>/weights/best.pt" format=onnx opset=13 simplify device=0
+```
