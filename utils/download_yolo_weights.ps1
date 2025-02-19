@@ -8,6 +8,8 @@ $WeightMapPath = Join-Path -Path $WeightDir -ChildPath 'weights_map.json'
 # jsonファイルを読み込む
 $WEIGHT_MAP = Get-Content -Raw -Path $WeightMapPath | ConvertFrom-Json -AsHashtable
 
+$ModelVersion = $ModelVersion.ToLower()
+$WeightNameList = $WeightNameList.ToLower()
 $YOLO_NAME = $WEIGHT_MAP.$ModelVersion.name
 $YOLO_WEIGHTS_LIST = $WEIGHT_MAP.$ModelVersion.weights
 $YOLO_URL = $WEIGHT_MAP.$ModelVersion.url
