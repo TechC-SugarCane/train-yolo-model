@@ -1,0 +1,39 @@
+name: lint
+
+on:
+    pull_request:
+        branches:
+            - main
+        paths:
+            - '**/*.py'
+
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv and set the python version
+        uses: astral-sh/setup-uv@v5
+        with:
+          # Install a specific version of uv.
+          python-version: "3.12"
+          version: "0.5.29"
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - name: Install dependencies
+        run: |
+          uv sync --extra cpu --dev
+    # Update output format to enable automatic inline annotations.
+      - name: Run Ruff
+        run: |
+          uv run ruff check --output-format=github .
+          uv run ruff format . --check --diff
+
+      - uses: AustinScola/mypy-cache-github-action@v1
+        name: Cache mypy cache
+
+      - name: Run mypy
+        run: uv run mypy --ignore-missing-imports --explicit-package-bases .
