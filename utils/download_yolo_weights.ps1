@@ -15,7 +15,7 @@ param(
     [Parameter(Mandatory = $true, HelpMessage = "モデルバージョンを指定してください。 (例: yolov10)")]
     [string]$ModelVersion,
 
-    [Parameter(Mandatory = $true, HelpMessage = "ダウンロードする重み名のリストを指定してください。 (例: s, m, l)")]
+    [Parameter(HelpMessage = "ダウンロードする重み名のリストを指定してください。 (例: s, m, l)")]
     [string[]]$WeightNameList
 )
 
@@ -53,6 +53,11 @@ $ModelInfo = $WEIGHT_MAP[$ModelVersion]
 $YOLO_NAME = $ModelInfo.name
 $YOLO_WEIGHTS_LIST = $ModelInfo.weights
 $YOLO_URL = $ModelInfo.url
+
+# WeightNameListが空の場合は全ての重みをダウンロード
+if ($WeightNameList.Length -eq 0) {
+    $WeightNameList = $YOLO_WEIGHTS_LIST
+}
 
 #-------------------------------------------
 # 重みファイルのダウンロード関数
