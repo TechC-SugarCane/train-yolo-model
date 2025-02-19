@@ -38,4 +38,61 @@ COCO
 </details>
 
 
-## Usage
+## Setup
+
+### 1. リポジトリをクローン
+
+```bash
+git clone git@github.com:TechC-SugarCane/train-yolo-model.git
+cd train-yolo-model
+```
+
+### 2. Pythonの環境構築
+
+```bash
+uv python install
+```
+
+### 3. ライブラリのインストール
+
+```bash
+# CPUで学習を行う場合
+uv sync --extra cpu
+
+# GPUで学習を行う場合
+uv sync --extra gpu
+```
+
+### 4. デフォルトセッティングを変更
+
+```bash
+# datasetsのディレクトリを../manage-dataset/に変更
+# デフォルトだと../datasetsが設定されている
+uv run yolo settings datasets_dir=../manage-dataset/
+```
+
+### 5. 事前学習済みモデルのダウンロード
+
+[`utils\download_yolo_weights.ps1`](.\utils\download_yolo_weights.ps1)を使うと、[`weights\weights_map.json`](weights/weights_map.json)に記載されているモデルの重みがダウンロードできます。
+
+```ps1
+# (例1) YOLOv10の全ての重みをダウンロード
+.\utils\download_yolo_weights.ps1 -v "yolov10"
+# (例2) YOLOv10のsの重みをダウンロード
+.\utils\download_yolo_weights.ps1 -v "yolov10" -w s
+# (例3) YOLOv10のs,m,lの重みをダウンロード
+.\utils\download_yolo_weights.ps1 -v "yolov10" -w s,m,l
+# (例4) YOLOv11の全ての重みを強制的にダウンロード
+.\utils\download_yolo_weights.ps1 -v "yolov11" -f
+```
+
+### 6. データセットのダウンロード
+
+データセットは 一階層上に[manage-datasetリポジトリ](https://github.com/TechC-SugarCane/manage-dataset)をcloneし、[manage-dataset/README](https://github.com/TechC-SugarCane/manage-dataset/blob/main/README.md)に従ってダウンロードしてください。
+
+```shell
+# clone済みの人はスキップ
+cd ..
+git clone git@github.com:TechC-SugarCane/manage-dataset.git
+# その後、READMEに従ってデータセットをダウンロード
+```
