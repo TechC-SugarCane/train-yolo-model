@@ -7,7 +7,7 @@ Ultralyticsライブラリを用いたYOLOのファインチューニングを�
 ## Model Information
 
 <details>
-<summary><h3>YOLOv10</h3></summary>
+<summary>YOLOv10</summary>
 
 ※ [THU-MIG/yolov10](https://github.com/THU-MIG/yolov10) から引用
 
@@ -102,7 +102,7 @@ git clone git@github.com:TechC-SugarCane/manage-dataset.git
 ## Training
 
 <details>
-<summary><h3>YOLOv10</h3></summary>
+<summary>YOLOv10</summary>
 
 ```bash
 # サトウキビをファインチューニングするコマンド
