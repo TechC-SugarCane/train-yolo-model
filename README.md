@@ -4,7 +4,7 @@
 
 Ultralyticsライブラリを用いたYOLOのファインチューニングを行うためのリポジトリ
 
-YOLOv8以降のモデルが学習可能です。
+学習可能なモデルは、[Models Supported by Ultralytics | Ultralytics docs](https://docs.ultralytics.com/ja/models/#which-yolo-versions-are-supported-by-ultralytics) を参照してください。
 
 ## Model Information
 
