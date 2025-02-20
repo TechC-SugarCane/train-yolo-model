@@ -56,7 +56,11 @@ uv python install
 ### 3. ライブラリのインストール
 
 ```bash
-uv sync
+# cpuで学習する場合
+uv sync --extra cpu
+
+# gpuで学習する場合
+uv sync --extra gpu
 ```
 
 ### 4. デフォルトセッティングを変更

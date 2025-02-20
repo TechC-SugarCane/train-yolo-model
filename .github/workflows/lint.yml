@@ -25,7 +25,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          uv sync --dev
+          uv sync --extra cpu --dev
     # Update output format to enable automatic inline annotations.
       - name: Run Ruff
         run: |

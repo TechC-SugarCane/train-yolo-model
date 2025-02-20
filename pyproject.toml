@@ -7,9 +7,6 @@ requires-python = ">=3.12.7"
 dependencies = [
     "albumentations>=2.0.4",
     "numpy==1.26.4",
-    "ultralytics==8.3.75",
-    "torch==2.6.0",
-    "torchvision==0.21.0",
 ]
 
 
@@ -27,17 +24,36 @@ logging = [
     "tensorboard>=2.13.0",
 ]
 
+[project.optional-dependencies]
+cpu = [
+    "torch==2.6.0",
+    "torchvision==0.21.0",
+    "ultralytics==8.3.75",
+]
+gpu = [
+    "torch==2.6.0",
+    "torchvision==0.21.0",
+    "ultralytics==8.3.75",
+]
+
 [tool.uv]
 default-groups = ["dev", "export", "logging"]
 
+conflicts = [
+    [
+        { extra = "cpu" },
+        { extra = "gpu" },
+    ],
+]
+
 [tool.uv.sources]
 torch = [
-    { index = "pytorch-cpu", marker = "sys_platform == 'darwin'"},
-    { index = "pytorch-cu118", marker = "sys_platform == 'linux' or sys_platform == 'win32'"}
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu118", extra = "gpu" },
 ]
 torchvision = [
-    { index = "pytorch-cpu", marker = "sys_platform == 'darwin'"},
-    { index = "pytorch-cu118", marker = "sys_platform == 'linux' or sys_platform == 'win32'"}
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu118", extra = "gpu" },
 ]
 
 [[tool.uv.index]]
