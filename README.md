@@ -1,8 +1,6 @@
 # train-yolo-model
 
-## About
-
-Ultralyticsライブラリを用いたYOLOのファインチューニングを行うためのリポジトリ
+Ultralyticsライブラリを用いたモデルのファインチューニングを行うためのリポジトリ
 
 学習可能なモデルは、[Models Supported by Ultralytics | Ultralytics docs](https://docs.ultralytics.com/ja/models/#which-yolo-versions-are-supported-by-ultralytics) を参照してください。
 
