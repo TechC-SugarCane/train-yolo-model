@@ -4,6 +4,8 @@
 
 Ultralyticsライブラリを用いたYOLOのファインチューニングを行うためのリポジトリ
 
+YOLOv8以降のモデルが学習可能です。
+
 ## Model Information
 
 <details>
@@ -129,6 +131,8 @@ uv run yolo detect train cfg='cfg/yolov10/pineapple.yaml' data=data/pineapple.ya
 ```bash
 uv run tensorboard --logdir ./runs/detect/<name(番号)>
 ```
+
+その後、`http://localhost:6006/`にアクセスしてください。
 
 ### 使用例
 
