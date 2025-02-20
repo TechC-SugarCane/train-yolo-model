@@ -24,6 +24,7 @@ logging = [
     "tensorboard>=2.13.0",
 ]
 
+# torchに依存するライブラリは、必ず全てこちらで管理する
 [project.optional-dependencies]
 cpu = [
     "torch==2.6.0",
