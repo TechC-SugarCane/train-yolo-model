@@ -18,8 +18,8 @@ jobs:
         uses: astral-sh/setup-uv@v5
         with:
           # Install a specific version of uv.
-          python-version: "3.12"
-          version: "0.5.29"
+          python-version: "3.12.7"
+          version: "0.6.0"
           enable-cache: true
           cache-dependency-glob: "uv.lock"
 
