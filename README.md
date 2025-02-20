@@ -56,11 +56,7 @@ uv python install
 ### 3. ライブラリのインストール
 
 ```bash
-# CPUで学習を行う場合
-uv sync --extra cpu
-
-# GPUで学習を行う場合
-uv sync --extra gpu
+uv sync
 ```
 
 ### 4. デフォルトセッティングを変更
@@ -112,7 +108,7 @@ uv run yolo detect train cfg='cfg/yolov10/sugarcane.yaml' data=data/sugarcane.ya
 uv run yolo detect train cfg='cfg/yolov10/pineapple.yaml' data=data/pineapple.yaml model=weights/yolov10/yolov10x.pt name='yolov10x-pineapple' epochs=300 batch=16 imgsz=640 device=0
 ```
 
-※ 上記を実行すると`yolov8n.pt`がダウンロードされますが、AMPというものの確認用に追加されているだけらしいので気にしなくて大丈夫です。
+※ 上記を実行すると`yolov8n.pt`,`yolo11n.pt`がダウンロードされますが、AMPというものの確認用に追加されているだけらしいので気にしなくて大丈夫です。
 詳しくは[#106](https://github.com/THU-MIG/yolov10/issues/106)を参照してください。
 </details>
 
@@ -124,6 +120,19 @@ uv run yolo detect train cfg='cfg/yolov10/pineapple.yaml' data=data/pineapple.ya
 
 - サトウキビ: `sugarcane.yaml`
 - パイナップル: `pineapple.yaml`
+
+## logging
+
+学習のログは`runs/detect/<name(番号)>`に保存されます。
+ログを確認する際は、tensorboardを使ってください。
+
+```bash
+uv run tensorboard --logdir ./runs/detect/<name(番号)>
+```
+
+### 使用例
+
+[![tensorboard](./assets/ex_tensorboard.png)](./assets/ex_tensorboard.png)
 
 ## Export
 
