@@ -1,0 +1,68 @@
+[project]
+name = "train-yolo-model"
+version = "0.1.0"
+description = "Train YOLO model"
+readme = "README.md"
+requires-python = ">=3.12.7"
+dependencies = [
+    "albumentations>=2.0.4",
+    "numpy==1.26.4",
+]
+
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15.0",
+    "ruff>=0.9.6",
+]
+export = [
+    "onnx>=1.17.0",
+    "onnxslim>=0.1.48",
+]
+
+logging = [
+    "tensorboard>=2.13.0",
+]
+
+# torchに依存するライブラリは、必ず全てこちらで管理する
+[project.optional-dependencies]
+cpu = [
+    "torch==2.6.0",
+    "torchvision==0.21.0",
+    "ultralytics==8.3.75",
+]
+gpu = [
+    "torch==2.6.0",
+    "torchvision==0.21.0",
+    "ultralytics==8.3.75",
+]
+
+[tool.uv]
+default-groups = ["dev", "export", "logging"]
+
+conflicts = [
+    [
+        { extra = "cpu" },
+        { extra = "gpu" },
+    ],
+]
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu118", extra = "gpu" },
+]
+torchvision = [
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu118", extra = "gpu" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu118"
+url = "https://download.pytorch.org/whl/cu118"
+explicit = true

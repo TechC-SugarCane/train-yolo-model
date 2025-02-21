@@ -1,0 +1,8 @@
+path: ../manage-dataset/datasets/pineapple
+train: train/images
+val: valid/images
+test: test/images
+
+
+nc: 1
+names: ['weed']
