@@ -149,6 +149,10 @@ def main():
         "batch": 8,
         "imgsz": 640,
         "device": 0,
+        # ハイパラ探索ではモデルの保存はしない
+        "save": False,
+        "exist_ok": True,
+        "name": "ray_tune/sugarcane",
     }
 
     result_grid = run_ray_tune(
