@@ -97,7 +97,37 @@ git clone git@github.com:TechC-SugarCane/manage-dataset.git
 # その後、READMEに従ってデータセットをダウンロード
 ```
 
+## Ray tuneを使用したハイパーパラメーターチューニング
 
+Ray tuneを使用して、ハイパーパラメーターのチューニングを行うことができます。
+
+
+```bash
+uv run grid_hyperparameter_tuning.py
+```
+
+### Error情報
+
+#### 「FileNotFoundError: [WinError 3] 指定されたパスが見つかりません。」
+
+Windowsにて起こるエラーです。
+Windowsはデフォルトでpath名が260文字までしか許可されていないため、長いpath名を使用していると起こります。
+この場合は、以下のコマンドを実行して、長いpath名を許可してください。
+
+```powershell
+# PowerShellを管理者権限で実行
+New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
+```
+
+参考: [パスの最大長の制限 - Win32 apps](https://learn.microsoft.com/ja-jp/windows/win32/fileio/maximum-file-path-limitation?tabs=powershell#registry-setting-to-enable-long-paths)
+
+#### 「UnicodeEncodeError: 'cp932' codec can't encode character '\u274c' in position 3871: illegal multibyte sequence」
+
+Windowsにて起こるエラーです。
+Windowsのデフォルトの文字コードが`cp932`であるため、stdoutに出力される文字列が`cp932`で表現できない場合に起こります。
+以下のサイトを参考に、文字コードを`cp65001`(UTF-8)に変更してください。
+
+[WindowsでUnicodeDecodeError: 'cp932' codec can't decode byte... が出たときの対処方法](https://qiita.com/misohagi/items/e26c589506a69261fe04#localegetpreferredencodingでcp932が出た場合)
 
 ## Training
 
