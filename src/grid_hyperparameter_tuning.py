@@ -14,7 +14,7 @@ from ray.tune.schedulers import ASHAScheduler
 import yaml
 
 
-# 以下のエラーがWindowsで起きるので、それの対策
+# 以下のエラー対策 (Windowsで起こる)
 # UnicodeEncodeError: 'cp932' codec can't encode character '\u274c' in position 3871: illegal multibyte sequence
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -33,6 +33,24 @@ def run_ray_tune(
     stop_train_epoch: Optional[int] = None,
     **train_args,
 ):
+    """
+    Ray Tuneでハイパパラメータチューニングを行う関数
+
+    Args:
+        model (YOLO): YOLOv10のモデル
+        space (dict): 探索するハイパパラメータの空間
+        grace_period (int): Grace period for ASHA scheduler
+        max_samples (int): 最大試行回数
+        stop_train_epoch (int): 学習を止めるエポック数
+
+    Returns:
+        results (dict): 結果の辞書
+
+    Note:
+        YOLOのmodel.tune()を使っていない理由:
+            model.tuneだと、エラー対策のためのtrial_dirname_creatorが引数指定できないため
+
+    """
     default_space = {
         # 'optimizer': tune.choice(['SGD', 'Adam', 'AdamW', 'NAdam', 'RAdam', 'RMSProp']),
         "lr0": tune.uniform(1e-5, 1e-1),
@@ -141,11 +159,11 @@ def main():
     model = YOLO("../weights/yolov10/yolov10n.pt", task="detect")
 
     train_args = {
-        # ライブラリ内でdataを参照するROOTが.venv/Lib/site-packages/ultralyticsなので、../../../data/sugarcane.yamlとする必要がある
+        # ライブラリ内でdataを参照するROOTが.venv/Lib/site-packages/ultralyticsなので、自前のファイルを参照させるために ../../../data/sugarcane.yaml とする必要がある
         "data": "../../../data/sugarcane.yaml",
         # これを設定しなくてもデフォルトで.venv\Lib\site-packages\ultralytics\cfg\default.yaml を参照してくれるが、ここがバージョンアップによって変わったら怖いので、固定している
         "cfg": "../../../cfg/yolov10/sugarcane.yaml",
-        "epochs": 300,
+        "epochs": 300,  # 本学習時と合わせる
         "batch": 8,
         "imgsz": 640,
         "device": 0,
